@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, Navigate } from "react-router-dom";
+import { Container } from "@mui/material";
+import { NavBar, Home, Auth, PostDetails } from "./components";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const User = !user ? <Auth /> : <Navigate to="/posts" />;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="2xl">
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Navigate to="/posts" />} />
+        <Route path="/posts" element={<Home />} />
+        <Route path="/posts/search" element={<Home />} />
+        <Route path="/posts/:id" element={<PostDetails />} />
+        <Route path="/auth" element={User} />
+      </Routes>
+    </Container>
   );
 }
 

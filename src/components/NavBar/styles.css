@@ -1,0 +1,10 @@
+.appBar {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 599px) {
+  .mainContainer {
+    flex-direction: column-reverse;
+  }
+}
